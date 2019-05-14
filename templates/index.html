@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mission to Mars</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="jumbotron text-center">
+      <h1>Mission to Mars</h1>
+      <p>a Mars landing site</p>
+      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Get Data!</a></p>
+    </div>
+    
+    <div class="container">
+      <div class="row">
+        
+
+        <article class="col-md-6">
+          <h2>Featured Image</h2>
+          <img class="img-responsive" src="{{ mars_data.featured_image_url }}">
+        </article>
+
+        <article class="col-md-6">
+            <h2>Latest News</h2>
+            <h3>{{ mars_data.news_title }}</h3>
+            <h4>{{ mars_data.news_p }}</h4>
+          </article>
+
+        <article class="col-md-6">
+          <h2>Current Weather on Mars</h2>
+          <h4>{{ mars_data.mars_weather }}</h4>
+        </article>
+
+        <article class="col-md-6">
+          <h2>Mars Facts</h2>
+          {{ mars_data.html_table | safe }}
+        </article>
+
+        <article class="col-md-12 container">
+          <h2>
+            Hemisphere Images
+          </h2>
+          {% for img in mars_data.hemisphere_image_urls %}
+          {% if loop.index0 % 2 == 0 %}<div class="row">{% endif %}
+            <div class="col-12 col-sm-6 col-md-6">
+              <div class="thumbnail">
+                  <a href="{{ img.img_url }}">
+                      <img src="{{ img.img_url }}" alt="{{ img.title }}" style="width:100%">
+                      <div class="caption">
+                        <p>{{ img.title }}</p>
+                      </div>
+                    
+                </a>
+              </div>
+            </div>
+          {% if loop.index0 % 2 == 1 or loop.last %}</div>{% endif %}
+          {% endfor %}
+  
+        </article>
+
+
+
+  </div>
+  </div>
+</body>
+
+</html>

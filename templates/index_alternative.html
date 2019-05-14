@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Mission to Mars</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="{{ url_for('static', filename='vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet"
+    type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
+    type="text/css">
+
+  <!-- Plugin CSS -->
+  <link href="{{ url_for('static', filename='vendor/magnific-popup/magnific-popup.css') }}" rel="stylesheet"
+    type="text/css">
+
+  <!-- Custom styles for this template -->
+  <link href="{{ url_for('static', filename='css/freelancer.min.css') }}" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">Mission to Mars</a>
+      <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button"
+        data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+        aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item mx-0 mx-lg-1">
+            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#Featured-Image">Featured Image</a>
+          </li>
+          <li class="nav-item mx-0 mx-lg-1">
+            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#Latest-News">Latest News</a>
+          </li>
+          <li class="nav-item mx-0 mx-lg-1">
+            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#Weather">Current Weather</a>
+          </li>
+          <li class="nav-item mx-0 mx-lg-1">
+            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#Mars-Facts">Mars Facts</a>
+          </li>
+          <li class="nav-item mx-0 mx-lg-1">
+            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#Hemisphere-Images">Hemisphere
+              Images</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header class="masthead bg-primary text-white text-center">
+    <div class="container">
+      <img class="img-fluid mb-5 d-block mx-auto" src="img/profile.png" alt="">
+      <h1 class="text-uppercase mb-0">Mission to Mars</h1>
+      <hr class="star-light">
+      <h2 class="font-weight-light mb-0">A Mars Landing Site</h2>
+    </div>
+  </header>
+
+  <!-- Featured Image Section -->
+  <section class="portfolio" id="Featured-Image">
+    <div class="container">
+      <h2 class="text-center text-uppercase text-secondary mb-0">Featured Image</h2>
+      <hr class="star-dark mb-5">
+      <div class="row">
+        <div class="col-md-12">
+          <img class="img-fluid" src="{{ mars_data.featured_image_url }}">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Latest News Section -->
+  <section class="bg-primary text-white mb-0" id="Latest-News">
+    <div class="container">
+      <h2 class="text-center text-uppercase text-white">Latest news</h2>
+      <hr class="star-light mb-5">
+      <div class="row">
+        <div class="col-lg-4 ml-auto">
+          <p class="lead">
+            <h3>{{ mars_data.news_title }}</h3>
+          </p>
+        </div>
+        <div class="col-lg-4 mr-auto">
+          <p class="lead">
+            {{ mars_data.news_p }}
+          </p>
+        </div>
+      </div>
+      <div class="text-center mt-4">
+        <a class="btn btn-xl btn-outline-light" href="https://mars.nasa.gov/news/">
+          More news!
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Weather Section -->
+  <section id="Weather">
+    <div class="container">
+      <h2 class="text-center text-uppercase text-secondary mb-0">Current Weather</h2>
+      <hr class="star-dark mb-5">
+      <div class="row">
+        <div class="col-lg-12 mr-auto">
+          <p class="lead text-secondary">
+            {{ mars_data.mars_weather }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mars Facts Section -->
+  <section class="bg-primary text-white mb-0" id="Mars-Facts">
+    <div class="container">
+      <h2 class="text-center text-uppercase text-white">Mars Facts</h2>
+      <hr class="star-light mb-5">
+      <div class="row">
+        <div class="col-lg-12 ml-auto">
+          <p class="lead" id="table-table">
+            {{ mars_data.html_table | safe }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hemisphere Images Section -->
+  <section class="portfolio" id="Hemisphere-Images">
+    <div class="container">
+      <h2 class="text-center text-uppercase text-secondary mb-0">Hemisphere Images</h2>
+      <hr class="star-dark mb-5">
+      <div class="row">
+        <div class="col-md-12">
+
+          {% for img in mars_data.hemisphere_image_urls %}
+          {% if loop.index0 % 2 == 0 %}<div class="row">{% endif %}
+            <div class="col-12 col-sm-6 col-md-6">
+              <div class="thumbnail">
+                <a href="{{ img.img_url }}">
+                  <img src="{{ img.img_url }}" alt="{{ img.title }}" style="width:100%">
+                  <div class="caption">
+                    <p>{{ img.title }}</p>
+                  </div>
+
+                </a>
+              </div>
+            </div>
+            {% if loop.index0 % 2 == 1 or loop.last %}</div>{% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <!-- <footer class="footer text-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 mb-5 mb-lg-0">
+          <h4 class="text-uppercase mb-4">Location</h4>
+          <p class="lead mb-0">2215 John Daniel Drive
+            <br>Clark, MO 65243</p>
+        </div>
+        <div class="col-md-4 mb-5 mb-lg-0">
+          <h4 class="text-uppercase mb-4">Around the Web</h4>
+          <ul class="list-inline mb-0">
+            <li class="list-inline-item">
+              <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#">
+                <i class="fab fa-fw fa-facebook-f"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#">
+                <i class="fab fa-fw fa-google-plus-g"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#">
+                <i class="fab fa-fw fa-twitter"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#">
+                <i class="fab fa-fw fa-linkedin-in"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#">
+                <i class="fab fa-fw fa-dribbble"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h4 class="text-uppercase mb-4">About Freelancer</h4>
+          <p class="lead mb-0">Freelance is a free to use, open source Bootstrap theme created by
+            <a href="http://startbootstrap.com">Start Bootstrap</a>.</p>
+        </div>
+      </div>
+    </div>
+  </footer> -->
+
+  <div class="copyright py-4 text-center text-white">
+    <div class="container">
+      <small>Copyright &copy; 2019 Rosina Tao Dodd</small>
+    </div>
+  </div>
+
+  <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+  <div class="scroll-to-top d-lg-none position-fixed ">
+    <a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+
+
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="{{ url_for('static', filename='vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
+
+  <!-- Contact Form JavaScript -->
+  <script src="{{ url_for('static', filename='js/jqBootstrapValidation.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/contact_me.js') }}"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="{{ url_for('static', filename='js/freelancer.min.js') }}"></script>
+
+</body>
+
+</html>
